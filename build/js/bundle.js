@@ -17,34 +17,34 @@ var list = void 0;
 login.displayLogin("view");
 
 document.getElementById("login-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    var form = e.target;
+	e.preventDefault();
+	var form = e.target;
 
-    login.logIn(form.elements[0].value, form.elements[1].value, function () {
-        list = new _list2.default();
-        list.displayList("view");
-    });
+	login.logIn(form.elements[0].value, form.elements[1].value, function () {
+		list = new _list2.default();
+		list.displayList("view");
+	});
 });
 
 loadXMLDoc();
 
 function loadXMLDoc() {
-    var xmlhttp = new XMLHttpRequest();
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	} else {
+		// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
 
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-            if (xmlhttp.status == 200) {
-                document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
-            } else if (xmlhttp.status == 400) {
-                alert('There was an error 400');
-            } else {
-                alert('something else other than 200 was returned' + xmlhttp.status);
-            }
-        }
-    };
-
-    xmlhttp.open("GET", "http://localhost:8080/", true);
-    xmlhttp.send();
+	xmlhttp.onreadystatechange = function () {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			console.log(JSON.parse(xmlhttp.responseText));
+		}
+	};
+	xmlhttp.open("GET", "http://localhost:8080/users", true);
+	xmlhttp.send();
 }
 
 },{"./list":2,"./login":3}],2:[function(require,module,exports){
