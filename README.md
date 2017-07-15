@@ -36,5 +36,4 @@ The app must be done in ES2015 without the help of any framework or library. The
 ## GULP Tasks
 The main gulp tasks are:
 
-	- gulp: Compile the sass file and watch for changes.
-	- gulp build: Build the final project.
+	- gulp: Compile all the files and build the projects
