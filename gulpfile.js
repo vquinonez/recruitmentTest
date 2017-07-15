@@ -1,5 +1,6 @@
 //Include required modules
 var gulp = require("gulp"),
+    service = require("gulp-service"),
     sass = require('gulp-sass'),
     browserSync = require('browser-sync').create(),
     babelify = require('babelify'),
@@ -29,7 +30,7 @@ gulp.task('dist-images',function(){
 });
 
 //Convert ES6 ode in all js files in src/js folder and copy to build folder as bundle.js
-gulp.task("build",["sass", "dist-html", "dist-images"], function(){
+gulp.task("build",["run:service","sass", "dist-html", "dist-images"], function(){
     return browserify({
         entries: ["./app/js/index.js"]
     })
@@ -54,7 +55,7 @@ gulp.task('reload-js', ['build'], () => {
     return gulp.src('app/js/**/*.js').pipe(connect.reload());
 });
 gulp.task('reload-html', ['build'], () => {
-    return gulp.src('app/**/*.html').pipe(connect.reload());
+    return gulp.src('app/*.html').pipe(connect.reload());
 });
 gulp.task('reload-css', ['build'], () => {
     return gulp.src('app/scss/**/*.scss').pipe(connect.reload());
@@ -71,4 +72,12 @@ gulp.task("startServer", function(){
         livereload : true,
         port : 9001
     });
+});
+
+gulp.task('run:service', function(){
+  service.run('server/index.js', {
+    env: {
+      port: 8080
+    }
+  });
 });
