@@ -13,8 +13,10 @@ app.get('/', function(req, res){
 });
 
 app.get('/users/', function(req, res){
-	res.setHeader('Content-Type', 'application/json');
   	res.sendFile(path.normalize(__dirname + '/data/users.json'))
+});
+app.get('/activities/', function(req, res){
+  	res.sendFile(path.normalize(__dirname + '/data/activities.json'))
 });
  
 app.listen(process.env.port);

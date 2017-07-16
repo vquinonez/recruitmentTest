@@ -72,23 +72,23 @@ var _list2 = _interopRequireDefault(_list);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var login = new _login2.default();
-var list = void 0;
+var list = new _list2.default();
+var login = new _login2.default(list);
+var loginForm = document.getElementById("login-form");
 
-login.displayLogin("view");
+if (document.body.contains(loginForm)) {
+	document.getElementById("login-form").addEventListener("submit", function (e) {
+		e.preventDefault();
+		var form = e.target;
 
-document.getElementById("login-form").addEventListener("submit", function (e) {
-	e.preventDefault();
-	var form = e.target;
-
-	login.logIn(form.elements[0].value, form.elements[1].value, function (data) {
-		console.log(data);
-		list = new _list2.default();
-		list.displayList("view");
-	}, function (res) {
-		console.log(res);
+		login.logIn(form.elements[0].value, form.elements[1].value, function (data) {
+			console.log(data);
+			list.displayList("view");
+		}, function (res) {
+			console.log(res);
+		});
 	});
-});
+}
 
 },{"./list":3,"./login":4}],3:[function(require,module,exports){
 "use strict";
@@ -103,6 +103,10 @@ var _viewsManager = require("./viewsManager");
 
 var _viewsManager2 = _interopRequireDefault(_viewsManager);
 
+var _dataManager = require("./dataManager");
+
+var _dataManager2 = _interopRequireDefault(_dataManager);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -110,6 +114,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var List = function () {
     function List() {
         _classCallCheck(this, List);
+
+        this.items = [];
     }
 
     _createClass(List, [{
@@ -118,6 +124,73 @@ var List = function () {
             var view = new _viewsManager2.default(selector);
 
             view.displayElement("../views/home.html");
+
+            this.getItems();
+        }
+    }, {
+        key: "getItems",
+        value: function getItems() {
+            var _this = this;
+
+            var data = new _dataManager2.default();
+
+            if (this.items.length == 0) {
+                data.get("http://localhost:8080/activities", function (data) {
+                    _this.items = data;
+                    console.log(data);
+                    _this.drawItems();
+                });
+            }
+        }
+    }, {
+        key: "drawItems",
+        value: function drawItems() {
+            var activitiesWrapper = document.getElementById('activities-list');
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var item = _step.value;
+
+                    var activityElem = document.createElement("div"),
+                        imgEelem = document.createElement("img"),
+                        infoWrapper = document.createElement("div"),
+                        anchor = document.createElement('a'),
+                        title = document.createElement('h3'),
+                        par = document.createElement('p');
+
+                    activityElem.className = 'col-md-12 activity';
+                    imgEelem.src = item.picture;
+                    infoWrapper.className = 'info';
+                    anchor.href = "activity/" + item.index;
+                    title.innerHTML = item.name;
+                    par.innerHTML = item.description;
+
+                    anchor.append(title);
+                    anchor.append(par);
+                    infoWrapper.append(anchor);
+                    activityElem.append(imgEelem);
+                    activityElem.append(infoWrapper);
+
+                    activitiesWrapper.append(activityElem);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
         }
     }]);
 
@@ -126,7 +199,7 @@ var List = function () {
 
 exports.default = List;
 
-},{"./viewsManager":5}],4:[function(require,module,exports){
+},{"./dataManager":1,"./viewsManager":5}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -148,8 +221,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Login = function () {
-    function Login() {
+    function Login(listComponent) {
         _classCallCheck(this, Login);
+
+        if (localStorage.getItem('logIn-user') != null) {
+            this.user = JSON.parse(localStorage.getItem('logIn-user'));
+
+            listComponent.displayList('view');
+        } else {
+            this.displayLogin('view');
+        }
     }
 
     _createClass(Login, [{
@@ -165,40 +246,44 @@ var Login = function () {
             var success = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
             var error = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function () {};
 
-            var data = new _dataManager2.default();
-            console.log("user: " + user + " " + "pass: " + pass);
+            if (this.user == undefined && this.user == null) {
+                var data = new _dataManager2.default();
 
-            data.get("http://localhost:8080/users", function (data) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
+                data.get("http://localhost:8080/users", function (data) {
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
 
-                try {
-                    for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var item = _step.value;
-
-                        if (item.user == item.user && item.password == pass) {
-                            success(item);
-                            return item;
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
                     try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
+                        for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                            var item = _step.value;
+
+                            if (item.user == item.user && item.password == pass) {
+                                localStorage.setItem("logIn-user", JSON.stringify(item));
+                                success(item);
+                                return item;
+                            }
                         }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
                     } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+                        } finally {
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
                         }
                     }
-                }
 
-                error('not matching');
-            });
+                    error('not matching');
+                });
+            } else {
+                success(this.user);
+            }
         }
     }]);
 

@@ -3,7 +3,14 @@ import DataManager from "./dataManager";
 
 export default class Login {
 
-    constructor (  ) {       
+    constructor ( listComponent ) {
+        if(localStorage.getItem('logIn-user') != null){
+            this.user = JSON.parse(localStorage.getItem('logIn-user'));
+
+            listComponent.displayList('view');
+        }else{
+            this.displayLogin('view');
+        }
     }
 
     displayLogin( selector ){
@@ -13,19 +20,23 @@ export default class Login {
     }
 
     logIn(user, pass, success = () => {}, error = () => {}){
-        let data = new DataManager();
-        console.log("user: "+ user + " " + "pass: "+ pass);
+        if((this.user == undefined) && (this.user == null)){
+            let data = new DataManager();
 
-        data.get("http://localhost:8080/users", (data) =>{
-            for( let item of data ){
-                if((item.user == item.user) && (item.password == pass)){
-                    success(item);
-                    return item;
+            data.get("http://localhost:8080/users", (data) =>{
+                for( let item of data ){
+                    if((item.user == item.user) && (item.password == pass)){
+                        localStorage.setItem( "logIn-user", JSON.stringify(item) );
+                        success(item);
+                        return item;
+                    }
                 }
-            }
 
-            error('not matching');
-        });
+                error('not matching');
+            });
+        }else{
+            success(this.user);
+        }
     }
 
 }
