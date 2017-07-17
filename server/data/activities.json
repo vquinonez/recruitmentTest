@@ -1,154 +1,262 @@
 [
   {
-    "kind": [
+    "_id": "596bbce43777afe358baa0d1",
+    "index": 0,
+    "name": "Tasmania",
+    "description": "Exercitation ullamco minim Lorem ullamco amet ullamco adipisicing pariatur eu ea consequat incididunt et elit. Do dolor non voluptate fugiat id duis est. Dolore sunt quis ad nisi nisi dolor deserunt pariatur velit eiusmod ut incididunt tempor laborum. Eu voluptate irure consequat ipsum. Sunt laboris cillum Lorem Lorem Lorem dolor officia sunt esse nisi dolore dolore commodo.",
+    "price": "180.99",
+    "picture": "http://placehold.it/120x120",
+    "address": "776 Randolph Street, Twilight",
+    "age": 24,
+    "eyeColor": "green",
+    "schedule": {
+      "open": "10:8",
+      "close": "21:20"
+    },
+    "oneTime": true,
+    "category": [
+      "restaurant",
+      "cinema"
+    ]
+  },
+  {
+    "_id": "596bbce4a82e44bdeeac4d63",
+    "index": 1,
+    "name": "Aquazure",
+    "description": "Velit fugiat ex est dolor esse non exercitation culpa proident Lorem irure nulla do non. Dolore excepteur eu eu reprehenderit veniam est aute consequat ea. Sit pariatur excepteur nulla anim dolor nostrud est ut sunt voluptate est id minim. Non fugiat tempor aliquip adipisicing tempor.",
+    "price": "346.64",
+    "picture": "http://placehold.it/120x120",
+    "address": "324 Nostrand Avenue, Forbestown",
+    "age": 20,
+    "eyeColor": "blue",
+    "schedule": {
+      "open": "11:16",
+      "close": "18:26"
+    },
+    "oneTime": false,
+    "category": [
+      "park",
+      "party"
+    ]
+  },
+  {
+    "_id": "596bbce44090f8036acdff1a",
+    "index": 2,
+    "name": "Arctiq",
+    "description": "Lorem consectetur minim tempor do. Voluptate in reprehenderit excepteur culpa exercitation voluptate irure qui. Non nulla voluptate eu fugiat ea veniam. Reprehenderit ut sit ex incididunt magna. Tempor mollit do excepteur proident est quis pariatur irure.",
+    "price": "216.1",
+    "picture": "http://placehold.it/120x120",
+    "address": "947 Hopkins Street, Katonah",
+    "age": 27,
+    "eyeColor": "green",
+    "schedule": {
+      "open": "5:59",
+      "close": "18:27"
+    },
+    "oneTime": true,
+    "category": [
+      "restaurant",
+      "cinema"
+    ]
+  },
+  {
+    "_id": "596bbce4eb0b0647c4d04efb",
+    "index": 3,
+    "name": "Golistic",
+    "description": "Minim magna sit non ex ad reprehenderit aliquip commodo excepteur sunt voluptate. Dolore culpa ea fugiat ex laboris eu dolore ad ullamco nulla eiusmod adipisicing duis ex. Ea deserunt laborum minim fugiat sunt cillum sit ipsum est. Proident veniam velit incididunt eu sunt deserunt officia quis enim sint aliqua id.",
+    "price": "393.25",
+    "picture": "http://placehold.it/120x120",
+    "address": "308 River Street, Moscow",
+    "age": 28,
+    "eyeColor": "blue",
+    "schedule": {
+      "open": "9:11",
+      "close": "21:15"
+    },
+    "oneTime": false,
+    "category": [
       "park",
       "cinema"
-    ],
-    "schedule": {
-      "close": "23:2",
-      "open": "1:48"
-    },
-    "eyeColor": "blue",
-    "age": 29,
-    "address": "353 Schermerhorn Street, Navarre",
-    "picture": "http://placehold.it/120x120",
-    "price": "$419.78",
-    "description": "Eiusmod minim consectetur sit mollit id voluptate enim fugiat ullamco. Proident ut adipisicing laborum quis quis velit eiusmod laborum velit ex mollit minim enim. Officia ex do eu Lorem deserunt sit adipisicing. Sunt ullamco aliquip do adipisicing laboris dolore pariatur sit elit. Tempor Lorem amet occaecat officia pariatur reprehenderit fugiat sit pariatur velit. Eu voluptate cillum nisi adipisicing eiusmod nisi dolore in.",
-    "name": "Mitroc",
-    "index": 0,
-    "_id": "596ad12cb5ff55644e63f709"
+    ]
   },
   {
-    "kind": [
-      "cinema",
-      "party"
-    ],
-    "schedule": {
-      "close": "21:59",
-      "open": "10:24"
-    },
-    "eyeColor": "brown",
-    "age": 22,
-    "address": "311 Lexington Avenue, Freeburn",
-    "picture": "http://placehold.it/120x120",
-    "price": "$377.16",
-    "description": "Irure magna aliqua reprehenderit ex minim velit eu laboris occaecat exercitation sunt. Lorem sunt nulla reprehenderit aliqua consequat eu sunt labore fugiat nostrud ad nulla. Ullamco aliqua excepteur nulla velit ut ad dolor culpa minim duis sint excepteur.",
-    "name": "Enervate",
-    "index": 1,
-    "_id": "596ad12c71cb74e8979b03c2"
-  },
-  {
-    "kind": [
-      "cinema",
-      "party"
-    ],
-    "schedule": {
-      "close": "20:2",
-      "open": "8:5"
-    },
-    "eyeColor": "blue",
-    "age": 29,
-    "address": "798 Brooklyn Avenue, Klagetoh",
-    "picture": "http://placehold.it/120x120",
-    "price": "$122.74",
-    "description": "Dolor consectetur id Lorem ipsum labore adipisicing anim officia officia. Sit dolore voluptate ea excepteur esse consequat proident cillum et velit ipsum exercitation. Qui ad magna do Lorem exercitation adipisicing aliqua laboris duis veniam. Aute in reprehenderit dolor reprehenderit tempor et exercitation officia ea ad proident do labore.",
-    "name": "Permadyne",
-    "index": 2,
-    "_id": "596ad12cd33e217c1b6a216c"
-  },
-  {
-    "kind": [
-      "cinema",
-      "park"
-    ],
-    "schedule": {
-      "close": "18:42",
-      "open": "8:40"
-    },
-    "eyeColor": "blue",
-    "age": 28,
-    "address": "953 Overbaugh Place, Laurelton",
-    "picture": "http://placehold.it/120x120",
-    "price": "$261.98",
-    "description": "Culpa consectetur tempor ullamco non. Cillum occaecat nostrud magna cillum ad laborum dolore in tempor ipsum eiusmod. Velit magna quis esse Lorem. Incididunt consectetur velit est aliqua velit id anim do anim est sint magna non adipisicing. Consectetur commodo duis laborum laboris voluptate exercitation sit pariatur. Irure cillum pariatur eu occaecat laborum culpa voluptate dolore aliquip enim ullamco. Ullamco consectetur consequat mollit pariatur laboris duis sint.",
-    "name": "Callflex",
-    "index": 3,
-    "_id": "596ad12cccbc313becb9fd59"
-  },
-  {
-    "kind": [
-      "park",
-      "park"
-    ],
-    "schedule": {
-      "close": "18:50",
-      "open": "1:6"
-    },
-    "eyeColor": "brown",
-    "age": 28,
-    "address": "675 Ridge Court, Townsend",
-    "picture": "http://placehold.it/120x120",
-    "price": "$266.49",
-    "description": "Duis Lorem Lorem aliqua reprehenderit eu velit nulla. Pariatur fugiat irure ad eu. Esse duis dolore sit magna duis laborum nulla irure cillum duis consectetur culpa. Tempor velit in magna duis deserunt reprehenderit. Consequat elit eiusmod dolor ad consequat. Mollit est reprehenderit elit et sit qui ad labore.",
-    "name": "Keeg",
+    "_id": "596bbce47ed7f6c58814523f",
     "index": 4,
-    "_id": "596ad12c8f51131b198deef6"
+    "name": "Xleen",
+    "description": "Occaecat dolore enim amet Lorem sit laboris laboris dolore tempor veniam duis. Duis adipisicing irure mollit qui. Elit esse nulla mollit ad veniam consectetur sint. Veniam sunt eiusmod aliqua consequat commodo velit aliqua anim. Aliquip incididunt esse ea ea aliqua eu dolore enim tempor. Proident veniam non ut aliquip velit laboris non pariatur deserunt qui dolore. Et sunt nostrud dolore dolore deserunt aute ut laborum nostrud Lorem aliquip cupidatat dolor magna.",
+    "price": "352.53",
+    "picture": "http://placehold.it/120x120",
+    "address": "313 Hicks Street, Coventry",
+    "age": 34,
+    "eyeColor": "green",
+    "schedule": {
+      "open": "7:11",
+      "close": "12:23"
+    },
+    "oneTime": false,
+    "category": [
+      "cinema",
+      "park"
+    ]
   },
   {
-    "kind": [
+    "_id": "596bbce4bd29646d36338c6e",
+    "index": 5,
+    "name": "Conjurica",
+    "description": "Deserunt ullamco cillum nulla aliquip quis magna eu commodo. Ullamco pariatur id ex magna aliqua ad commodo velit velit do pariatur aliquip deserunt officia. Consequat mollit velit eu culpa irure enim aute ipsum duis id. Esse in qui commodo deserunt aliqua consectetur id culpa cupidatat commodo. Lorem elit in duis duis aute. Enim sint qui dolor id Lorem esse cupidatat laborum eiusmod ex. Magna minim voluptate commodo labore.",
+    "price": "147.15",
+    "picture": "http://placehold.it/120x120",
+    "address": "415 Fay Court, Nicut",
+    "age": 34,
+    "eyeColor": "brown",
+    "schedule": {
+      "open": "10:44",
+      "close": "23:1"
+    },
+    "oneTime": false,
+    "category": [
+      "party",
+      "park"
+    ]
+  },
+  {
+    "_id": "596bbce4041d998f717bee51",
+    "index": 6,
+    "name": "Qiao",
+    "description": "Do exercitation sint sunt enim cupidatat. Ut dolor cillum excepteur elit magna eiusmod duis. Consectetur amet ipsum dolor reprehenderit voluptate aute esse qui ea laboris. Ea anim incididunt qui irure commodo. Et in labore proident sint fugiat. Esse sit culpa eiusmod excepteur cupidatat commodo nostrud cillum excepteur et ullamco qui.",
+    "price": "394.8",
+    "picture": "http://placehold.it/120x120",
+    "address": "225 Prince Street, Kraemer",
+    "age": 25,
+    "eyeColor": "blue",
+    "schedule": {
+      "open": "4:28",
+      "close": "24:0"
+    },
+    "oneTime": false,
+    "category": [
       "party",
       "restaurant"
-    ],
-    "schedule": {
-      "close": "13:30",
-      "open": "5:41"
-    },
-    "eyeColor": "green",
-    "age": 21,
-    "address": "113 Roosevelt Place, Nogal",
-    "picture": "http://placehold.it/120x120",
-    "price": "$350.60",
-    "description": "Cupidatat nostrud dolor commodo occaecat consequat ipsum aliquip. Ipsum cillum sint eu exercitation veniam magna elit aliqua Lorem sunt magna labore. Ex labore aliquip laboris excepteur eu. Elit aliqua consectetur ut dolor culpa cupidatat non in consectetur enim. Ut in mollit anim elit do.",
-    "name": "Zolarity",
-    "index": 5,
-    "_id": "596ad12ccfafa1b2825b14d7"
+    ]
   },
   {
-    "kind": [
-      "park",
-      "cinema"
-    ],
-    "schedule": {
-      "close": "23:23",
-      "open": "2:45"
-    },
-    "eyeColor": "blue",
-    "age": 28,
-    "address": "714 Gerry Street, Sunwest",
-    "picture": "http://placehold.it/120x120",
-    "price": "$126.02",
-    "description": "Labore magna laboris aliqua proident esse commodo sunt dolor esse nisi. Reprehenderit qui aliquip dolor ea culpa Lorem adipisicing amet. Cupidatat veniam culpa cupidatat deserunt occaecat laborum ex eiusmod est sint eu aute velit cupidatat.",
-    "name": "Exiand",
-    "index": 6,
-    "_id": "596ad12c6f10d1472cabcb60"
-  },
-  {
-    "kind": [
-      "party",
-      "park"
-    ],
-    "schedule": {
-      "close": "17:34",
-      "open": "8:48"
-    },
-    "eyeColor": "brown",
-    "age": 30,
-    "address": "990 Lloyd Street, Rockhill",
-    "picture": "http://placehold.it/120x120",
-    "price": "$234.19",
-    "description": "Amet est quis pariatur reprehenderit occaecat irure. Nisi commodo esse ullamco cillum ad eiusmod officia qui est nisi cillum ad deserunt. Ipsum veniam tempor incididunt ea labore deserunt sunt pariatur commodo. Magna cillum sint nisi aliqua commodo ullamco ad exercitation aute labore dolore culpa commodo. Cillum proident minim duis tempor laborum Lorem excepteur nulla consequat.",
-    "name": "Grok",
+    "_id": "596bbce47ebe16104d81dbb6",
     "index": 7,
-    "_id": "596ad12c0700a51c6f5cf140"
+    "name": "Zedalis",
+    "description": "Quis cillum in reprehenderit in commodo nulla et enim adipisicing qui reprehenderit reprehenderit eu sunt. Consectetur veniam dolor do adipisicing id irure amet est elit nisi commodo eiusmod. Ad irure sint aute sit velit consequat ex sit. Sit aute proident do cupidatat anim sunt.",
+    "price": "248.23",
+    "picture": "http://placehold.it/120x120",
+    "address": "539 Gerald Court, Salvo",
+    "age": 34,
+    "eyeColor": "brown",
+    "schedule": {
+      "open": "11:12",
+      "close": "15:1"
+    },
+    "oneTime": true,
+    "category": [
+      "cinema",
+      "party"
+    ]
+  },
+  {
+    "_id": "596bbce4004e6965492704d3",
+    "index": 8,
+    "name": "Quilm",
+    "description": "Enim duis consectetur ex non consequat Lorem esse aliqua commodo exercitation nisi velit deserunt. In laboris officia aute laborum est nisi ipsum mollit deserunt minim excepteur nisi. Velit incididunt reprehenderit consectetur occaecat culpa commodo ea consectetur cupidatat fugiat adipisicing sunt. Magna nisi eu dolore ex et duis velit exercitation. Consectetur labore consectetur quis aute quis adipisicing minim eu mollit est. Duis et laboris Lorem cillum enim eiusmod exercitation excepteur laborum officia ut.",
+    "price": "288.74",
+    "picture": "http://placehold.it/120x120",
+    "address": "148 Apollo Street, Onton",
+    "age": 26,
+    "eyeColor": "green",
+    "schedule": {
+      "open": "9:24",
+      "close": "17:13"
+    },
+    "oneTime": false,
+    "category": [
+      "restaurant",
+      "party"
+    ]
+  },
+  {
+    "_id": "596bbce4ed5e3dfff17764ce",
+    "index": 9,
+    "name": "Imaginart",
+    "description": "Dolore veniam adipisicing excepteur sint amet magna eiusmod qui eiusmod anim amet culpa ipsum nisi. Qui enim et non sit et cupidatat duis in consectetur eu eiusmod. Consectetur nulla cillum labore ad incididunt eu. Consequat excepteur eu ut occaecat aliqua incididunt minim minim magna incididunt dolore cupidatat ut eiusmod.",
+    "price": "383.31",
+    "picture": "http://placehold.it/120x120",
+    "address": "330 Gilmore Court, Movico",
+    "age": 28,
+    "eyeColor": "green",
+    "schedule": {
+      "open": "3:27",
+      "close": "23:2"
+    },
+    "oneTime": true,
+    "category": [
+      "restaurant",
+      "park"
+    ]
+  },
+  {
+    "_id": "596bbce451e975cf5947947f",
+    "index": 10,
+    "name": "Optique",
+    "description": "Laboris qui reprehenderit amet nulla irure culpa proident est exercitation anim duis eu. Tempor ea nisi id nostrud occaecat nulla officia aliqua enim Lorem elit irure cillum. Proident amet enim deserunt culpa ut. Tempor ex quis amet sunt ut sit magna nostrud tempor non.",
+    "price": "107.17",
+    "picture": "http://placehold.it/120x120",
+    "address": "833 Allen Avenue, Kylertown",
+    "age": 35,
+    "eyeColor": "green",
+    "schedule": {
+      "open": "5:19",
+      "close": "14:40"
+    },
+    "oneTime": true,
+    "category": [
+      "park",
+      "restaurant"
+    ]
+  },
+  {
+    "_id": "596bbce46d5c091a45149642",
+    "index": 11,
+    "name": "Medesign",
+    "description": "Est nostrud consequat do laboris enim in tempor sit nisi incididunt eiusmod. Laborum exercitation ut dolor pariatur laborum laboris. Do esse sint magna deserunt. Eiusmod proident anim laboris anim sit do. Amet dolor commodo laboris est deserunt ex anim sunt minim exercitation anim aliqua consequat nulla. Cupidatat aliqua esse minim minim ex anim proident aliquip veniam aliqua Lorem esse. Minim Lorem proident veniam eiusmod sit aute tempor consequat sit occaecat.",
+    "price": "459.03",
+    "picture": "http://placehold.it/120x120",
+    "address": "516 Judge Street, Floris",
+    "age": 33,
+    "eyeColor": "brown",
+    "schedule": {
+      "open": "7:35",
+      "close": "16:44"
+    },
+    "oneTime": true,
+    "category": [
+      "cinema",
+      "party"
+    ]
+  },
+  {
+    "_id": "596bbce421f08196fc184c77",
+    "index": 12,
+    "name": "Tropoli",
+    "description": "Aliquip officia Lorem consectetur consequat occaecat commodo. Ut tempor exercitation eu ut magna consequat aliqua labore exercitation. Dolor incididunt cillum aliqua ea officia dolor. Et consequat occaecat consectetur dolore nostrud fugiat in non adipisicing labore minim cillum excepteur. Duis proident pariatur commodo esse nulla ea ullamco ut duis exercitation Lorem dolore dolore elit. Fugiat tempor velit sint ullamco adipisicing eiusmod nostrud dolore nostrud elit exercitation. Quis cillum Lorem pariatur anim duis nulla veniam incididunt elit esse anim nisi cillum.",
+    "price": "445.84",
+    "picture": "http://placehold.it/120x120",
+    "address": "776 Mersereau Court, Lawrence",
+    "age": 30,
+    "eyeColor": "green",
+    "schedule": {
+      "open": "10:23",
+      "close": "13:58"
+    },
+    "oneTime": false,
+    "category": [
+      "cinema",
+      "park"
+    ]
   }
 ]
