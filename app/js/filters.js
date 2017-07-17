@@ -13,6 +13,7 @@ export default class Filters extends EventEmitter {
     		isOpen: false,
     		category: false,
     		price: false,
+            favorite: false
     	};
     }
 
@@ -92,6 +93,14 @@ export default class Filters extends EventEmitter {
 
     }
 
+    getUser(){
+        let user;
+
+        user = JSON.parse(localStorage.getItem("logIn-user"));
+
+        return user;
+    }
+
     setListeners(){
     	let self = this;
     	document.getElementById('one-time').addEventListener('change', (e) =>{
@@ -117,6 +126,9 @@ export default class Filters extends EventEmitter {
 
     		self.priceChange(e);
     	});
+        document.getElementById('is-fav').addEventListener('change', (e) =>{
+            self.favChange(e);
+        });
     }
 
     oneTimeChange(e){
@@ -145,6 +157,12 @@ export default class Filters extends EventEmitter {
 		this.data = this.applyFilters(this.mainData, this.filterObject);
 
     }
+    favChange(e){
+
+        this.filterObject.favorite = e.target.checked;
+        this.data = this.applyFilters(this.mainData, this.filterObject);
+
+    }
 
     applyFilters(data, filtersObject){
     	let res = data; 
@@ -161,6 +179,9 @@ export default class Filters extends EventEmitter {
     	if(filtersObject.price){
     		res = this.filterPrice(res);
     	}
+        if(filtersObject.favorite){
+            res = this.filterFav(res);
+        }
 
 	 	this.emit("filtersChange", {event: res});
     	return res;
@@ -219,6 +240,20 @@ export default class Filters extends EventEmitter {
 	 	});
 
 	 	return res;
+    }
+
+    filterFav( array ){
+        let res =[],
+            userFav = this.getUser().favActivities;
+
+        res = array.filter((elem) => {
+            for(let fav of userFav){
+                if(elem.index == fav)
+                    return elem;
+            }
+        });
+
+        return res;
     }
 
 }

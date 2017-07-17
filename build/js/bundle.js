@@ -304,7 +304,8 @@ var Filters = function (_EventEmitter) {
             oneTime: false,
             isOpen: false,
             category: false,
-            price: false
+            price: false,
+            favorite: false
         };
         return _this;
     }
@@ -494,6 +495,15 @@ var Filters = function (_EventEmitter) {
             document.getElementById('max-value').innerHTML = maxSlider.max;
         }
     }, {
+        key: "getUser",
+        value: function getUser() {
+            var user = void 0;
+
+            user = JSON.parse(localStorage.getItem("logIn-user"));
+
+            return user;
+        }
+    }, {
         key: "setListeners",
         value: function setListeners() {
             var self = this;
@@ -519,6 +529,9 @@ var Filters = function (_EventEmitter) {
                 document.getElementById('max-value').innerHTML = e.target.value;
 
                 self.priceChange(e);
+            });
+            document.getElementById('is-fav').addEventListener('change', function (e) {
+                self.favChange(e);
             });
         }
     }, {
@@ -550,6 +563,13 @@ var Filters = function (_EventEmitter) {
             this.data = this.applyFilters(this.mainData, this.filterObject);
         }
     }, {
+        key: "favChange",
+        value: function favChange(e) {
+
+            this.filterObject.favorite = e.target.checked;
+            this.data = this.applyFilters(this.mainData, this.filterObject);
+        }
+    }, {
         key: "applyFilters",
         value: function applyFilters(data, filtersObject) {
             var res = data;
@@ -565,6 +585,9 @@ var Filters = function (_EventEmitter) {
             }
             if (filtersObject.price) {
                 res = this.filterPrice(res);
+            }
+            if (filtersObject.favorite) {
+                res = this.filterFav(res);
             }
 
             this.emit("filtersChange", { event: res });
@@ -642,6 +665,41 @@ var Filters = function (_EventEmitter) {
 
             res = array.filter(function (elem) {
                 if (parseInt(elem.price) > parseInt(minVal.value)) if (elem.price < maxVal.value) return elem;
+            });
+
+            return res;
+        }
+    }, {
+        key: "filterFav",
+        value: function filterFav(array) {
+            var res = [],
+                userFav = this.getUser().favActivities;
+
+            res = array.filter(function (elem) {
+                var _iteratorNormalCompletion7 = true;
+                var _didIteratorError7 = false;
+                var _iteratorError7 = undefined;
+
+                try {
+                    for (var _iterator7 = userFav[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                        var fav = _step7.value;
+
+                        if (elem.index == fav) return elem;
+                    }
+                } catch (err) {
+                    _didIteratorError7 = true;
+                    _iteratorError7 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                            _iterator7.return();
+                        }
+                    } finally {
+                        if (_didIteratorError7) {
+                            throw _iteratorError7;
+                        }
+                    }
+                }
             });
 
             return res;
