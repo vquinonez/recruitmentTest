@@ -24,7 +24,6 @@ if(document.body.contains(loginForm)){
 	} );
 }
 
-//Revisar cual es el problema
 document.getElementById("home").addEventListener('click', (e) =>{
 	e.preventDefault();
 
