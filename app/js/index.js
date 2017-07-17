@@ -24,6 +24,17 @@ if(document.body.contains(loginForm)){
 	} );
 }
 
+//Revisar cual es el problema
+document.getElementById("home").addEventListener('click', (e) =>{
+	e.preventDefault();
+
+	if(localStorage.getItem("logIn-user")){
+		list.displayList("view");
+	}else{
+		login.displayLogin("view");
+	}
+});
+
 list.on('clickActivity', (e) =>{
 	console.log(e);
 	detail.displayDetails("view", e.idAct);

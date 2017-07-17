@@ -14,7 +14,7 @@ export default class List extends EventEmitter {
 	displayList( selector ){
         let view = new ViewManager(selector);
         let self = this;
-        
+
         view.displayElement("../views/home.html");
     	this.filter.displayFilters("activities-filters");
 
@@ -36,10 +36,13 @@ export default class List extends EventEmitter {
     	if( this.items.length == 0 ){
     		data.get("http://localhost:8080/activities", (data) =>{
 	            this.items = data;
-	            
+
 	            this.filter.setData(this.items);
 	            this.drawItems();
         	});
+    	}else{
+    		this.filter.setData(this.items);
+	        this.drawItems();
     	}
     }
 
