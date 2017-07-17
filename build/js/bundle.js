@@ -163,6 +163,7 @@ var Details = function () {
             open.innerHTML = activity.schedule.open;
             close.innerHTML = activity.schedule.close;
             price.innerHTML = '$' + activity.price;
+            agregarFav.href = activity.index;
 
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -201,7 +202,6 @@ var Details = function () {
                     var fav = _step2.value;
 
                     if (fav == activity.index) {
-                        agregarFav.href = fav;
                         agregarFav.setAttribute('data-add', "false");
                         agregarFav.innerHTML = "Quitar";
                         break;
@@ -226,8 +226,6 @@ var Details = function () {
                 e.preventDefault();
                 var val = e.target.getAttribute("href"),
                     add = e.target.getAttribute("data-add") == "true";
-
-                console.log(e.target.getAttribute("data-add"));
 
                 if (add) user.favActivities.push(val);
 
@@ -750,6 +748,7 @@ if (document.body.contains(loginForm)) {
 document.getElementById("home").addEventListener('click', function (e) {
 	e.preventDefault();
 
+	list.items = [];
 	if (localStorage.getItem("logIn-user")) {
 		list.displayList("view");
 	} else {

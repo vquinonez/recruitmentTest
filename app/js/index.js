@@ -27,6 +27,7 @@ if(document.body.contains(loginForm)){
 document.getElementById("home").addEventListener('click', (e) =>{
 	e.preventDefault();
 
+	list.items = [];
 	if(localStorage.getItem("logIn-user")){
 		list.displayList("view");
 	}else{

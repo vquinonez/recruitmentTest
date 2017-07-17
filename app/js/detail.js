@@ -73,6 +73,7 @@ export default class Details {
         open.innerHTML = activity.schedule.open;
         close.innerHTML = activity.schedule.close;
         price.innerHTML = '$'+activity.price;
+        agregarFav.href = activity.index;
 
         for(let cat of activity.category){
             let actCat = document.createElement('span');
@@ -83,7 +84,6 @@ export default class Details {
 
         for(let fav of user.favActivities){
             if(fav == activity.index){
-                agregarFav.href = fav;
                 agregarFav.setAttribute('data-add', "false");
                 agregarFav.innerHTML = "Quitar";
                 break;
@@ -95,7 +95,6 @@ export default class Details {
             let val = e.target.getAttribute("href"),
                 add = (e.target.getAttribute("data-add") == "true");
 
-            console.log(e.target.getAttribute("data-add"));
 
             if(add)
                 user.favActivities.push(val);
