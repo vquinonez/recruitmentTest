@@ -61,8 +61,6 @@ export default class Filters extends EventEmitter {
     		catSelect.append(option);
     	}
 
-    	console.log(categories);
-
     }
 
     setPricesValues(){
@@ -150,8 +148,6 @@ export default class Filters extends EventEmitter {
 
     applyFilters(data, filtersObject){
     	let res = data; 
-
-    	console.log(filtersObject);
 
     	if(filtersObject.oneTime){
     		res = this.filterOnetime(res);

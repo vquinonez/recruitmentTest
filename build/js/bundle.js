@@ -72,6 +72,211 @@ var _viewsManager = require("./viewsManager");
 
 var _viewsManager2 = _interopRequireDefault(_viewsManager);
 
+var _dataManager = require("./dataManager");
+
+var _dataManager2 = _interopRequireDefault(_dataManager);
+
+var _mapController = require("./mapController");
+
+var _mapController2 = _interopRequireDefault(_mapController);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Details = function () {
+    function Details() {
+        _classCallCheck(this, Details);
+
+        this.items = [];
+
+        this.getItems();
+    }
+
+    _createClass(Details, [{
+        key: "getItems",
+        value: function getItems() {
+            var _this = this;
+
+            var data = new _dataManager2.default();
+
+            if (this.items.length == 0) {
+                data.get("http://localhost:8080/activities", function (data) {
+                    _this.items = data;
+                });
+            }
+        }
+    }, {
+        key: "getItem",
+        value: function getItem(val) {
+            return this.items.filter(function (elem) {
+                if (elem.index == val) return elem;
+            })[0];
+        }
+    }, {
+        key: "getUser",
+        value: function getUser() {
+            var user = void 0;
+
+            user = JSON.parse(localStorage.getItem("logIn-user"));
+
+            return user;
+        }
+    }, {
+        key: "setUser",
+        value: function setUser(user) {
+            localStorage.setItem("logIn-user", JSON.stringify(user));
+        }
+    }, {
+        key: "displayDetails",
+        value: function displayDetails(selector, val) {
+            var view = new _viewsManager2.default(selector);
+
+            view.displayElement("../views/detail.html");
+            this.fillView(val);
+        }
+    }, {
+        key: "fillView",
+        value: function fillView(val) {
+            var activity = this.getItem(val),
+                img = document.getElementById('act-img'),
+                title = document.getElementById('act-title'),
+                agregarFav = document.getElementById('add-elem'),
+                desc = document.getElementById('act-desc'),
+                addres = document.getElementById('act-address'),
+                open = document.getElementById('open-time'),
+                close = document.getElementById('close-time'),
+                price = document.getElementById('price'),
+                catWrapper = document.getElementById('act-cat'),
+                map = new _mapController2.default("map", activity.location.position, activity.name),
+                user = this.getUser(),
+                self = this;
+
+            this.idAct = val;
+
+            console.log(activity);
+
+            img.src = activity.picture;
+            title.innerHTML = activity.name;
+            desc.innerHTML = activity.description;
+            addres.innerHTML = activity.location.address;
+            open.innerHTML = activity.schedule.open;
+            close.innerHTML = activity.schedule.close;
+            price.innerHTML = '$' + activity.price;
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = activity.category[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var cat = _step.value;
+
+                    var actCat = document.createElement('span');
+
+                    actCat.className = "pull-right";
+                    actCat.innerHTML = cat;
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = user.favActivities[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var fav = _step2.value;
+
+                    if (fav == activity.index) {
+                        agregarFav.href = fav;
+                        agregarFav.setAttribute('data-add', "false");
+                        agregarFav.innerHTML = "Quitar";
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            agregarFav.addEventListener('click', function (e) {
+                e.preventDefault();
+                var val = e.target.getAttribute("href"),
+                    add = e.target.getAttribute("data-add") == "true";
+
+                console.log(e.target.getAttribute("data-add"));
+
+                if (add) user.favActivities.push(val);
+
+                self.updateFavBtn(val, add);
+            });
+        }
+    }, {
+        key: "updateFavBtn",
+        value: function updateFavBtn(value, add) {
+            var user = this.getUser(),
+                agregarFav = document.getElementById('add-elem');
+
+            console.log(add);
+
+            if (add) {
+                user.favActivities.push(parseInt(value));
+
+                agregarFav.innerHTML = "Quitar";
+                agregarFav.setAttribute('data-add', "false");
+            } else {
+                var index = user.favActivities.indexOf(parseInt(value));
+                user.favActivities.splice(index, 1);
+
+                agregarFav.innerHTML = "Agregar";
+                agregarFav.setAttribute('data-add', "true");
+            }
+
+            this.setUser(user);
+        }
+    }]);
+
+    return Details;
+}();
+
+exports.default = Details;
+
+},{"./dataManager":1,"./mapController":7,"./viewsManager":8}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _viewsManager = require("./viewsManager");
+
+var _viewsManager2 = _interopRequireDefault(_viewsManager);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -237,8 +442,6 @@ var Filters = function (_EventEmitter) {
                     }
                 }
             }
-
-            console.log(categories);
         }
     }, {
         key: "setPricesValues",
@@ -351,8 +554,6 @@ var Filters = function (_EventEmitter) {
         value: function applyFilters(data, filtersObject) {
             var res = data;
 
-            console.log(filtersObject);
-
             if (filtersObject.oneTime) {
                 res = this.filterOnetime(res);
             }
@@ -452,7 +653,7 @@ var Filters = function (_EventEmitter) {
 
 exports.default = Filters;
 
-},{"./viewsManager":6,"events":7}],3:[function(require,module,exports){
+},{"./viewsManager":8,"events":9}],4:[function(require,module,exports){
 'use strict';
 
 var _login = require("./login");
@@ -463,10 +664,15 @@ var _list = require("./list");
 
 var _list2 = _interopRequireDefault(_list);
 
+var _detail = require("./detail");
+
+var _detail2 = _interopRequireDefault(_detail);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var list = new _list2.default();
 var login = new _login2.default(list);
+var detail = new _detail2.default();
 var loginForm = document.getElementById("login-form");
 
 if (document.body.contains(loginForm)) {
@@ -483,7 +689,12 @@ if (document.body.contains(loginForm)) {
 	});
 }
 
-},{"./list":4,"./login":5}],4:[function(require,module,exports){
+list.on('clickActivity', function (e) {
+	console.log(e);
+	detail.displayDetails("view", e.idAct);
+});
+
+},{"./detail":2,"./list":5,"./login":6}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -508,12 +719,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var List = function () {
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EventEmitter = require('events');
+
+var List = function (_EventEmitter) {
+    _inherits(List, _EventEmitter);
+
     function List() {
         _classCallCheck(this, List);
 
-        this.items = [];
-        this.filter = new _filters2.default();
+        var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this));
+
+        _this.items = [];
+        _this.filter = new _filters2.default();
+        return _this;
     }
 
     _createClass(List, [{
@@ -534,23 +756,22 @@ var List = function () {
     }, {
         key: "processFilters",
         value: function processFilters(array) {
-            console.log(array);
             this.items = array;
             this.drawItems();
         }
     }, {
         key: "getItems",
         value: function getItems() {
-            var _this = this;
+            var _this2 = this;
 
             var data = new _dataManager2.default();
 
             if (this.items.length == 0) {
                 data.get("http://localhost:8080/activities", function (data) {
-                    _this.items = data;
+                    _this2.items = data;
 
-                    _this.filter.setData(_this.items);
-                    _this.drawItems();
+                    _this2.filter.setData(_this2.items);
+                    _this2.drawItems();
                 });
             }
         }
@@ -558,6 +779,8 @@ var List = function () {
         key: "drawItems",
         value: function drawItems() {
             var activitiesWrapper = document.getElementById('activities-list');
+
+            this.removeListeners();
 
             activitiesWrapper.innerHTML = '';
 
@@ -579,7 +802,8 @@ var List = function () {
                     activityElem.className = 'col-md-12 activity';
                     imgEelem.src = item.picture;
                     infoWrapper.className = 'info';
-                    anchor.href = "activity/" + item.index;
+                    anchor.href = item.index;
+                    anchor.className = 'link-detail';
                     title.innerHTML = item.name;
                     par.innerHTML = item.description;
 
@@ -605,15 +829,82 @@ var List = function () {
                     }
                 }
             }
+
+            this.anchorListeners();
+        }
+    }, {
+        key: "removeListeners",
+        value: function removeListeners() {
+            var anchors = document.getElementsByClassName('link-detail');
+
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = anchors[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var anchor = _step2.value;
+
+                    anchor.removeEventListener("click", function () {});
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+        }
+    }, {
+        key: "anchorListeners",
+        value: function anchorListeners() {
+            var _this3 = this;
+
+            var anchors = document.getElementsByClassName('link-detail');
+
+            var _iteratorNormalCompletion3 = true;
+            var _didIteratorError3 = false;
+            var _iteratorError3 = undefined;
+
+            try {
+                for (var _iterator3 = anchors[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                    var anchor = _step3.value;
+
+                    anchor.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        _this3.emit("clickActivity", { idAct: e.target.closest("a").getAttribute("href") });
+                    });
+                }
+            } catch (err) {
+                _didIteratorError3 = true;
+                _iteratorError3 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                        _iterator3.return();
+                    }
+                } finally {
+                    if (_didIteratorError3) {
+                        throw _iteratorError3;
+                    }
+                }
+            }
         }
     }]);
 
     return List;
-}();
+}(EventEmitter);
 
 exports.default = List;
 
-},{"./dataManager":1,"./filters":2,"./viewsManager":6}],5:[function(require,module,exports){
+},{"./dataManager":1,"./filters":3,"./viewsManager":8,"events":9}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -706,7 +997,66 @@ var Login = function () {
 
 exports.default = Login;
 
-},{"./dataManager":1,"./viewsManager":6}],6:[function(require,module,exports){
+},{"./dataManager":1,"./viewsManager":8}],7:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+//This Class manage the Map.
+var MapController = function () {
+
+  //Constructo of the Class, it recieve the container id and the initial center
+  function MapController(container) {
+    var center = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+    var markerName = arguments[2];
+
+    _classCallCheck(this, MapController);
+
+    this.container = container;
+    this.center = center;
+    this.markerName = markerName;
+
+    //This initialize the map
+    this.initMap();
+  }
+
+  //This initialize the map with the default center.
+
+
+  _createClass(MapController, [{
+    key: "initMap",
+    value: function initMap() {
+      var self = this;
+      this.map = new google.maps.Map(document.getElementById(self.container), {
+        zoom: 17,
+        center: this.center
+      });
+
+      this.setMarker(this.center);
+    }
+  }, {
+    key: "setMarker",
+    value: function setMarker(position) {
+      var marker = new google.maps.Marker({
+        position: this.center,
+        map: this.map,
+        title: this.markerName
+      });
+    }
+  }]);
+
+  return MapController;
+}();
+
+exports.default = MapController;
+
+},{}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -744,7 +1094,7 @@ var ViewManager = function () {
 
 exports.default = ViewManager;
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1048,4 +1398,4 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}]},{},[3]);
+},{}]},{},[4]);

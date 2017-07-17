@@ -1,6 +1,7 @@
 [
 	{
 		"user": "ricardo",
-		"password": "ricardo"
+		"password": "ricardo",
+		"favActivities": [ 0, 3, 7, 10]
 	}
 ]

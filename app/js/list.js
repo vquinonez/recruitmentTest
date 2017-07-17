@@ -1,10 +1,12 @@
 import ViewManager from "./viewsManager";
 import DataManager from "./dataManager";
 import Filters from "./filters";
+const EventEmitter = require('events');
 
-export default class List {
+export default class List extends EventEmitter {
 
     constructor (  ) {
+    	super();
     	this.items = [];
     	this.filter = new Filters();
     }
@@ -24,7 +26,6 @@ export default class List {
     }
 
     processFilters( array ){
-    	console.log(array);
     	this.items = array;
     	this.drawItems();
     }
@@ -45,6 +46,8 @@ export default class List {
     drawItems ( ){
     	let activitiesWrapper = document.getElementById('activities-list');
 
+    	this.removeListeners();
+
     	activitiesWrapper.innerHTML = '';
 
     	for( let item of this.items ){
@@ -58,7 +61,8 @@ export default class List {
     		activityElem.className = 'col-md-12 activity';
     		imgEelem.src = item.picture;
     		infoWrapper.className = 'info';
-    		anchor.href = "activity/"+item.index;
+    		anchor.href = item.index;
+    		anchor.className = 'link-detail';
     		title.innerHTML = item.name;
     		par.innerHTML = item.description;
 
@@ -69,6 +73,27 @@ export default class List {
     		activityElem.append(infoWrapper);
 
     		activitiesWrapper.append(activityElem);
+    	}
+
+    	this.anchorListeners();
+    }
+
+    removeListeners(){
+    	let anchors = document.getElementsByClassName('link-detail');
+
+    	for( let anchor of anchors ){
+    		anchor.removeEventListener("click", () => {});
+    	}
+    }
+
+    anchorListeners(){
+		let anchors = document.getElementsByClassName('link-detail');
+
+    	for( let anchor of anchors ){
+    		anchor.addEventListener("click",(e) =>{
+    			e.preventDefault();
+    			this.emit("clickActivity", { idAct : e.target.closest("a").getAttribute("href") });
+    		});
     	}
     }
 }

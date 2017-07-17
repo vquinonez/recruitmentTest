@@ -5840,3 +5840,28 @@ button.close {
         text-decoration: none; }
   #activities-list .activity:last-of-type {
     border-bottom: 0; }
+
+.detail img {
+  width: 100%; }
+
+.detail .header h2 {
+  display: inline; }
+
+.detail .header a {
+  display: inline; }
+
+.detail #act-address {
+  font-weight: bold;
+  margin-bottom: 20px; }
+
+.detail #map {
+  background-color: #fffef4;
+  height: 200px;
+  margin-bottom: 20px; }
+
+.detail .data span {
+  margin-right: 10px; }
+
+.detail .categories span {
+  margin-left: 10px;
+  color: #999; }

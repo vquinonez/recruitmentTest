@@ -42,3 +42,40 @@
 		}
 	}
 }
+
+.detail{
+	img{
+		width: 100%;
+	}
+	.header{
+		h2{
+			display: inline;
+		}
+		a{
+			display: inline;
+		}
+	}
+
+	#act-address{
+		font-weight: bold;
+		margin-bottom: 20px;
+	}
+	#map{
+		background-color: #fffef4;
+		height: 200px;
+		margin-bottom: 20px;
+	}
+
+	.data{
+		span{
+			margin-right: 10px;
+		}
+	}
+
+	.categories{
+		span{
+			margin-left: 10px;
+			color: #999;
+		}
+	}
+}
